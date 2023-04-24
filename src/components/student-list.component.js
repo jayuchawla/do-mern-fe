@@ -5,41 +5,41 @@ import { Table } from "react-bootstrap";
 import StudentTableRow from "./StudentTableRow";
 
 const StudentList = () => {
-const [students, setStudents] = useState([]);
+	const [students, setStudents] = useState([]);
 
-useEffect(() => {
-    console.log("hello");
-	axios
-	.get("http://localhost:4000/students/")
-	.then(({ data }) => {
-		setStudents(data);
-	})
-	.catch((error) => {
-		console.log(error);
-	});
-}, []);
+	useEffect(() => {
+		console.log(process.env.REACT_APP_API_HOST + "/students/");
+		axios
+			.get(process.env.REACT_APP_API_HOST + "/students/")
+			.then(({ data }) => {
+				setStudents(data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, []);
 
-const DataTable = () => {
-	return students.map((res, i) => {
-	return <StudentTableRow obj={res} key={i} />;
-	});
-};
+	const DataTable = () => {
+		return students.map((res, i) => {
+			return <StudentTableRow obj={res} key={i} />;
+		});
+	};
 
-return (
-	<div className="table-wrapper">
-	<Table striped bordered hover>
-		<thead>
-		<tr>
-			<th>Name</th>
-			<th>Email</th>
-			<th>Roll No</th>
-			<th>Action</th>
-		</tr>
-		</thead>
-		<tbody>{DataTable()}</tbody>
-	</Table>
-	</div>
-);
+	return (
+		<div className="table-wrapper">
+			<Table striped bordered hover>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Roll No</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>{DataTable()}</tbody>
+			</Table>
+		</div>
+	);
 };
 
 export default StudentList;
