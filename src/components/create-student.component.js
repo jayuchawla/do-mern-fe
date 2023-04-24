@@ -5,7 +5,6 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import StudentForm from "./StudentForm";
 
-console.log(process.env);
 // CreateStudent Component
 const CreateStudent = () => {
 	const [formValues, setFormValues] =
